@@ -53,8 +53,11 @@ public class App {
      */
     public static int factorial(int n) {
         if (n < 0) throw new IllegalArgumentException("Negative number");
+        if (n > 12) throw new ArithmeticException("Factorial overflow");
         int result = 1;
-        for (int i = 2; i <= n; i++) result *= i;
+        for (int i = 2; i <= n; i++) {
+            result = Math.multiplyExact(result, i);
+        }
         return result;
     }
 
