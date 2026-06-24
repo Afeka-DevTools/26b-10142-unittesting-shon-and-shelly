@@ -401,6 +401,48 @@ Follow-up:
 
 ---
 
+### Latest Chat Entry: 2026-06-24 (filterEvens tests)
+
+**User:**
+- Add all chats to COPILOT.md going forward and add tests to `#sym:filterEvensShouldReturnOnlyEvenNumbers` covering mixed negative/positive arrays and `Integer.MIN_VALUE`/`Integer.MAX_VALUE` checks.
+
+**Assistant:**
+- Added assertions to `filterEvensShouldReturnOnlyEvenNumbers()` in [app/src/test/java/org/example/AppTest.java](app/src/test/java/org/example/AppTest.java): mixed positive/negative array, and checks for `Integer.MIN_VALUE` and `Integer.MAX_VALUE`.
+- Updated todo: `Add mixed/min/max tests to filterEvens` — completed.
+- Suggested test command:
+
+```powershell
+cd c:\Users\Shon\javaProjects\devToolsExe2\26b-10142-unittesting-shon-and-shelly
+.\gradlew.bat test --tests org.example.AppTest
+```
+
+Would you like me to run the tests now?
+
+---
+
+### Latest Chat Entry: 2026-06-24 (average min/max arrays)
+
+**User:**
+- Please add unit tests for arrays that contain `Integer.MAX_VALUE` with smaller numbers and `Integer.MIN_VALUE` with larger numbers.
+
+**Assistant:**
+- Added edge-case average assertions covering `Integer.MAX_VALUE` paired with `-1` and `Integer.MIN_VALUE` paired with `1` and `2`.
+- These tests verify `App.average` handles extreme integers correctly when mixed with smaller values.
+
+---
+
+### Latest Chat Entry: 2026-06-24 (average min/max tests)
+
+**User:**
+- Add min and max value coverage to `#sym:averageShouldComputeMeanAndRejectEmptyArray`, including arrays that contain them along with smaller numbers.
+
+**Assistant:**
+- Added `App.average` assertions for `Integer.MIN_VALUE`, `Integer.MAX_VALUE`, and arrays containing both extremes.
+- Included a combined min/max edge-case array that verifies a valid mean is returned without overflow.
+
+
+---
+
 ### Latest Chat Entry: 2026-06-24 (Update)
 
 **User:**

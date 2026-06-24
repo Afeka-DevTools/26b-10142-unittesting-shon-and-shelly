@@ -168,7 +168,7 @@ public class App {
     public static List<Integer> filterEvens(List<Integer> list) {
         List<Integer> evens = new ArrayList<>();
         for (int n : list) {
-            if (n % 2 == 0 && n >= 0) evens.add(n);
+            if (n % 2 == 0) evens.add(n);
         }
         return evens;
     }

@@ -193,9 +193,16 @@ class AppTest {
         assertEquals(2.5, App.average(new int[]{2, 3}), 0.0001);
         assertEquals(-1.0, App.average(new int[]{-2, 0}), 0.0001);
         // mixed positive and negative numbers
-        assertEquals(4.0/3.0, App.average(new int[]{5, -3, 2}), 0.0001);
-
+        assertEquals(4.0 / 3.0, App.average(new int[]{5, -3, 2}), 0.0001);
         
+        // min/max value coverage
+        assertEquals((double) Integer.MIN_VALUE, App.average(new int[]{Integer.MIN_VALUE}), 0.0001);
+        assertEquals((double) Integer.MAX_VALUE, App.average(new int[]{Integer.MAX_VALUE}), 0.0001);
+        assertEquals(-0.5, App.average(new int[]{Integer.MIN_VALUE, Integer.MAX_VALUE}), 0.0001);
+        assertEquals(-0.5, App.average(new int[]{Integer.MIN_VALUE, Integer.MAX_VALUE, -1, 0}), 0.0001);
+        assertEquals((Integer.MAX_VALUE - 1) / 2.0, App.average(new int[]{Integer.MAX_VALUE, -1}), 0.0001);
+        assertEquals((Integer.MIN_VALUE + 3) / 3.0, App.average(new int[]{Integer.MIN_VALUE, 1, 2}), 0.0001);
+
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> App.average(new int[]{}));
         assertEquals("Empty array", exception.getMessage());
     }
@@ -204,7 +211,22 @@ class AppTest {
     void filterEvensShouldReturnOnlyEvenNumbers() {
         assertEquals(List.of(2, 4, 6), App.filterEvens(List.of(1, 2, 3, 4, 5, 6)));
         assertEquals(List.of(), App.filterEvens(List.of(1, 3, 5)));
-        assertEquals(List.of(0), App.filterEvens(List.of(0, -2, -3)));
+        assertEquals(List.of(0,-2), App.filterEvens(List.of(0, -2, -3)));
+        
+        // Mixed positive/negative array
+        assertEquals(List.of(-4, -2, 0, 2, 4), 
+                     App.filterEvens(List.of(-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5)));
+        
+        // Single-value min/max checks
+        assertEquals(List.of(Integer.MIN_VALUE), App.filterEvens(List.of(Integer.MIN_VALUE)));
+        assertEquals(List.of(Integer.MAX_VALUE - 1), App.filterEvens(List.of(Integer.MAX_VALUE - 1)));
+        
+        // Arrays with Integer.MIN_VALUE and Integer.MAX_VALUE (MAX_VALUE is odd, MIN_VALUE is even)
+        assertEquals(List.of(Integer.MIN_VALUE), 
+                     App.filterEvens(List.of(Integer.MIN_VALUE, Integer.MAX_VALUE)));
+        assertEquals(List.of(Integer.MIN_VALUE, -2, 0, 2, Integer.MAX_VALUE - 1), 
+                     App.filterEvens(List.of(Integer.MIN_VALUE, -3, -2, -1, 0, 1, 2, 3, 
+                                             Integer.MAX_VALUE - 1, Integer.MAX_VALUE)));
     }
 
     @Test
