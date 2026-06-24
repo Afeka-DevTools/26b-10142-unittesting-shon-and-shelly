@@ -198,6 +198,17 @@ assertEquals("54321", App.reverse("12345"));
 ```java
 // Test with special characters
 assertEquals("!@#", App.reverse("#@!"));
+
+---
+
+## Latest Chat Entry
+
+### User Request 👤
+- Add all of our chat so far and from now on to the `COPILOT.md` file.
+
+### Assistant Response 🤖
+- Appended this chat entry to `logs/COPILOT.MD`.
+- Confirmed that future conversation entries will also be logged here.
 assertEquals(")(", App.reverse("()"));
 ```
 
@@ -287,3 +298,103 @@ assertEquals("Negative number", exceptionMin.getMessage());
 - Updated `App.factorial()` to throw `ArithmeticException("Factorial overflow")` when `n > 12`.
 - Added tests ensuring `App.factorial(13)` and `App.factorial(Integer.MAX_VALUE)` throw `ArithmeticException`.
 - Kept existing negative-number tests for `IllegalArgumentException("Negative number")`.
+
+---
+
+## Chat Session: 2026-06-22
+
+### User Request 👤
+- Add everything we have talked about so far today and from now on to the COPILOT.md.
+
+### Assistant Response 🤖
+- Appended today's chat entry to `logs/COPILOT.MD`.
+- Confirmed that future conversation entries will also be logged in this file.
+
+---
+
+## Full Transcript for 2026-06-22
+
+### User Prompts
+- "make it possible for the palindrom to contain special characters, tabs and spaces"
+- "make it possible to contain special characters, spaces, tabs in the parameter of the of this methos"
+- "i dont want it to ignore them. i want the, to take into considiration"
+- "i want it to work for this types of strings: \"abC$$Cba\" or \"a E$##$E a\""
+- "will it work for \"aB$Ba\"?"
+- "null is palindrom"
+- "add all of our chat so far and from now on to the COPILOT.md"
+- "add everything we have talked about so far today and from now on to the COPILOT.md"
+- "add all of the prompts and all of our chats from today, all of my prompts and your responses and whatever you added to the code and add all of it to the COPILOT.md file"
+
+### Assistant Responses
+- Confirmed `App.isPalindrome` would be updated to compare all characters, including spaces, tabs, and special characters.
+- Changed `App.isPalindrome` so it no longer filters out non-alphanumeric characters.
+- Added case-insensitive comparison across the entire string.
+- Clarified that `"abC$$Cba"`, `"a E$##$E a"`, and `"a\tb\ta"` are intended to work as palindromes.
+- Confirmed that `"aB$Ba"` works with the current implementation.
+- Updated `App.isPalindrome` to treat `null` as a palindrome.
+- Logged instructions and chat history to `logs/COPILOT.MD`.
+- Appended today’s chat transcript and agreed to continue logging future chats.
+
+### Code Changes Added Today
+- In `app/src/main/java/org/example/App.java`:
+  - Updated `isPalindrome(String s)` to return `true` when `s == null`.
+  - Kept spaces, tabs, punctuation, and special characters in the palindrome comparison.
+  - Converted both characters to lowercase before comparing.
+  - Updated the Javadoc for `isPalindrome` to document that all characters are compared and that `null` is treated as a palindrome.
+
+- In `app/src/test/java/org/example/AppTest.java`:
+  - Added or maintained tests for `App.isPalindrome` including:
+    - `"racecar"`
+    - `"RaceCar"`
+    - `"abC$$Cba"`
+    - `"a E$##$E a"`
+    - `"a\tb\ta"`
+    - negative cases such as `"A man, a plan, a canal: Panama"`, `"Madam, I'm Adam"`, and `"hello"`
+
+---
+
+### Notes
+- From this point forward, I will continue recording the user prompts and assistant responses in `logs/COPILOT.MD`.
+ 
+---
+
+### Update: charFrequency tests added (2026-06-24)
+
+- Added unit test `charFrequencyShouldHandleSpacesTabsAndSpecialCharacters()` to `app/src/test/java/org/example/AppTest.java`.
+- The test uses input string `"a a\tb!b@c"` and asserts counts for: `'a'` (2), space (1), tab (1), `'b'` (2), `'!'` (1), `'@'` (1), `'c'` (1).
+- Ran unit tests; all tests pass.
+
+---
+
+### Chat Section: `fibonacciUpToShouldReturnSequenceUpToLimit` (2026-06-24)
+
+User Prompts:
+- "now we'll work on fibonacciUpToShouldReturnSequenceUpToLimit"
+- Questions about negative inputs, MIN_VALUE, MAX_VALUE, bigger numbers (e.g., 100), and overflow behavior.
+
+Assistant Responses / Decisions:
+- `fibonacciUpTo(int n)` should throw `IllegalArgumentException("Negative input")` for negative `n` (including `Integer.MIN_VALUE`).
+- For valid non-negative `n`, return the Fibonacci sequence up to the largest Fibonacci number <= n. Examples covered in tests: `0`, `1`, `3`, `8`, and `100`.
+- Detect integer overflow when generating the sequence. If the next Fibonacci number would overflow `int`, throw `ArithmeticException("Fibonacci overflow")` rather than producing wrapped values.
+- Add tests validating the above behavior: sequences for small limits, `IllegalArgumentException` for negative inputs, and `ArithmeticException("Fibonacci overflow")` when calling with `Integer.MAX_VALUE`.
+
+Code & Test Notes:
+- Tests added to `app/src/test/java/org/example/AppTest.java` assert:
+  - `App.fibonacciUpTo(0)` → `[0]`
+  - `App.fibonacciUpTo(1)` → `[0,1,1]`
+  - `App.fibonacciUpTo(3)` → `[0,1,1,2,3]`
+  - `App.fibonacciUpTo(8)` → `[0,1,1,2,3,5,8]`
+  - `App.fibonacciUpTo(100)` → `[0,1,1,2,3,5,8,13,21,34,55,89]`
+  - `App.fibonacciUpTo(-1)` and `App.fibonacciUpTo(Integer.MIN_VALUE)` throw `IllegalArgumentException("Negative input")`.
+  - `App.fibonacciUpTo(Integer.MAX_VALUE)` throws `ArithmeticException("Fibonacci overflow")`.
+
+Follow-up:
+- Implemented the overflow check and added the tests; test run passed earlier in this session.
+
+ 
+---
+
+### Update: Consolidated `charFrequency` tests (2026-06-24)
+
+- Merged whitespace/special-character assertions into `charFrequencyShouldCountCharactersCorrectly` and removed the duplicate test method.
+- Verified unit tests after the change; all tests pass.

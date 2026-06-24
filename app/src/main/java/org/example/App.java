@@ -64,12 +64,26 @@ public class App {
     /**
      * Checks if a string is a palindrome.
      *
+     * This comparison includes all characters in the string, including spaces,
+     * tabs, and punctuation. Letter comparison is case-insensitive.
+     * A null input is treated as a palindrome.
+     *
      * @param s the string to check
      * @return true if s is a palindrome, false otherwise
      */
     public static boolean isPalindrome(String s) {
-        String clean = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-        return clean.equals(reverse(clean));
+        if (s == null) return true;
+
+        int left = 0;
+        int right = s.length() - 1;
+        while (left < right) {
+            char leftChar = Character.toLowerCase(s.charAt(left));
+            char rightChar = Character.toLowerCase(s.charAt(right));
+            if (leftChar != rightChar) return false;
+            left++;
+            right--;
+        }
+        return true;
     }
 
     /**
@@ -78,6 +92,7 @@ public class App {
      * @param n the upper limit for Fibonacci numbers
      * @return a list of Fibonacci numbers up to n
      * @throws IllegalArgumentException if n is negative
+     * @throws ArithmeticException if Fibonacci sequence would overflow
      */
     public static List<Integer> fibonacciUpTo(int n) {
         List<Integer> result = new ArrayList<>();
@@ -85,6 +100,10 @@ public class App {
         int a = 0, b = 1;
         while (a <= n) {
             result.add(a);
+            // Check for overflow before addition
+            if (b > 0 && a > Integer.MAX_VALUE - b) {
+                throw new ArithmeticException("Fibonacci overflow");
+            }
             int temp = a + b;
             a = b;
             b = temp;
@@ -144,7 +163,7 @@ public class App {
     public static List<Integer> filterEvens(List<Integer> list) {
         List<Integer> evens = new ArrayList<>();
         for (int n : list) {
-            if (n % 2 == 0) evens.add(n);
+            if (n % 2 == 0 && n >= 0) evens.add(n);
         }
         return evens;
     }

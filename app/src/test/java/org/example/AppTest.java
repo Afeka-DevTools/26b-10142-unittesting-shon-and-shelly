@@ -113,8 +113,14 @@ class AppTest {
     void isPalindromeShouldIgnoreCaseAndNonAlphanumericCharacters() {
         assertTrue(App.isPalindrome("racecar"));
         assertTrue(App.isPalindrome("RaceCar"));
-        assertTrue(App.isPalindrome("A man, a plan, a canal: Panama"));
+        assertTrue(App.isPalindrome("abC$$Cba"));
+        assertTrue(App.isPalindrome("a E$##$E a"));
+        assertTrue(App.isPalindrome("a\tb\ta"));
+        assertFalse(App.isPalindrome("A man, a plan, a canal: Panama"));
+        assertFalse(App.isPalindrome("A man,\ta plan, a canal: Panama"));
+        assertFalse(App.isPalindrome("Madam, I'm Adam"));
         assertFalse(App.isPalindrome("hello"));
+        assertTrue(App.isPalindrome(null));
     }
 
     @Test
@@ -126,18 +132,42 @@ class AppTest {
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> App.fibonacciUpTo(-1));
         assertEquals("Negative input", exception.getMessage());
+        
+        // Test Integer.MIN_VALUE (negative, should throw exception)
+        IllegalArgumentException exceptionMin = assertThrows(IllegalArgumentException.class, () -> App.fibonacciUpTo(Integer.MIN_VALUE));
+        assertEquals("Negative input", exceptionMin.getMessage());
+        
+        // Test with a bigger number (e.g., 100)
+        assertEquals(List.of(0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89), App.fibonacciUpTo(100));
+        
+        // Test with Integer.MAX_VALUE (should throw ArithmeticException for overflow)
+        ArithmeticException overflowException = assertThrows(ArithmeticException.class, () -> App.fibonacciUpTo(Integer.MAX_VALUE));
+        assertEquals("Fibonacci overflow", overflowException.getMessage());
     }
 
     @Test
     void charFrequencyShouldCountCharactersCorrectly() {
         Map<Character, Integer> frequency = App.charFrequency("aabbc");
         assertEquals(3, frequency.size());
-        assertEquals(2, frequency.get('a')); 
-        assertEquals(2, frequency.get('b')); 
+        assertEquals(2, frequency.get('a'));
+        assertEquals(2, frequency.get('b'));
         assertEquals(1, frequency.get('c'));
 
         Map<Character, Integer> emptyFrequency = App.charFrequency("");
         assertTrue(emptyFrequency.isEmpty());
+
+        // additional checks with whitespace and special characters
+        String input = "a a\tb!b@c";
+        Map<Character, Integer> freq = App.charFrequency(input);
+        // distinct characters: 'a', ' ' (space), '\t' (tab), 'b', '!', '@', 'c' => 7
+        assertEquals(7, freq.size());
+        assertEquals(2, freq.get('a'));
+        assertEquals(1, freq.get(' '));
+        assertEquals(1, freq.get('\t'));
+        assertEquals(2, freq.get('b'));
+        assertEquals(1, freq.get('!'));
+        assertEquals(1, freq.get('@'));
+        assertEquals(1, freq.get('c'));
     }
 
     @Test
