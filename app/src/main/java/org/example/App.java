@@ -128,13 +128,18 @@ public class App {
     /**
      * Checks if two strings are anagrams of each other.
      *
+     * Non-alphanumeric characters are ignored and comparison is case-insensitive.
+     *
      * @param s1 the first string
      * @param s2 the second string
      * @return true if s1 and s2 are anagrams, false otherwise
      */
     public static boolean isAnagram(String s1, String s2) {
-        char[] a1 = s1.replaceAll("\\s", "").toLowerCase().toCharArray();
-        char[] a2 = s2.replaceAll("\\s", "").toLowerCase().toCharArray();
+        if (s1 == null || s2 == null) {
+            return false;
+        }
+        char[] a1 = s1.replaceAll("[^A-Za-z0-9]", "").toLowerCase().toCharArray();
+        char[] a2 = s2.replaceAll("[^A-Za-z0-9]", "").toLowerCase().toCharArray();
         Arrays.sort(a1);
         Arrays.sort(a2);
         return Arrays.equals(a1, a2);

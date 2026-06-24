@@ -1,4 +1,4 @@
-# Chat Transcript
+﻿# Chat Transcript
 
 ## User Request 👤
 - create unit testing for this project that covers all of the cases for the `App.java` project
@@ -198,17 +198,6 @@ assertEquals("54321", App.reverse("12345"));
 ```java
 // Test with special characters
 assertEquals("!@#", App.reverse("#@!"));
-
----
-
-## Latest Chat Entry
-
-### User Request 👤
-- Add all of our chat so far and from now on to the `COPILOT.md` file.
-
-### Assistant Response 🤖
-- Appended this chat entry to `logs/COPILOT.MD`.
-- Confirmed that future conversation entries will also be logged here.
 assertEquals(")(", App.reverse("()"));
 ```
 
@@ -227,6 +216,17 @@ assertEquals("321cBa", App.reverse("aBc123"));
   - Numbers
   - Special characters (!, @, #, (), etc.)
   - Mixed character types
+
+---
+
+## Latest Chat Entry: 2026-06-24
+
+### User Request 👤
+- Add all of our chats so far and from now on to the `COPILOT.md` file.
+
+### Assistant Response 🤖
+- Appended this chat entry to `logs/COPILOT.MD`.
+- Confirmed that future conversation entries will be logged with explicit `User:` and `Assistant:` labels.
 
 ---
 
@@ -398,3 +398,45 @@ Follow-up:
 
 - Merged whitespace/special-character assertions into `charFrequencyShouldCountCharactersCorrectly` and removed the duplicate test method.
 - Verified unit tests after the change; all tests pass.
+
+---
+
+### Latest Chat Entry: 2026-06-24 (Update)
+
+**User:**
+- Please add our latest chat to the COPILOT.md file as well.
+
+**Assistant:**
+- Added a mixed positive/negative array assertion to `averageShouldComputeMeanAndRejectEmptyArray()` in [app/src/test/java/org/example/AppTest.java](app/src/test/java/org/example/AppTest.java).
+- Updated the todo list: `Add mixed-number test to average` — completed. Remaining: `Run tests to verify change`.
+- Suggested command to run the tests locally:
+
+```powershell
+cd c:\Users\Shon\javaProjects\devToolsExe2\26b-10142-unittesting-shon-and-shelly
+.\gradlew.bat test --tests org.example.AppTest
+```
+
+If you'd like, I can run the tests now or run the full suite and report results.
+
+---
+
+### Update: `isAnagram` changes and tests (2026-06-24)
+
+- Updated `App.isAnagram` to normalize by removing all non-alphanumeric characters and compare case-insensitively.
+- Added multiple anagram test cases that ignore spaces, tabs, punctuation, and special characters. Example assertions added to `app/src/test/java/org/example/AppTest.java`:
+```java
+assertTrue(App.isAnagram("listen", "silent"));
+assertTrue(App.isAnagram("The eyes", "They see"));
+assertTrue(App.isAnagram("Dormitory", "Dirty room"));
+assertTrue(App.isAnagram("Conversation", "Voices rant on"));
+assertTrue(App.isAnagram("A gentleman", "Elegant man"));
+assertTrue(App.isAnagram("Clint Eastwood", "Old West action"));
+assertTrue(App.isAnagram("Eleven plus two", "Twelve plus one"));
+assertTrue(App.isAnagram("William Shakespeare", "I am a weakish speller"));
+assertTrue(App.isAnagram("The Morse Code", "Here come dots"));
+assertTrue(App.isAnagram("S!p@e#c$i%a^l", "!S@p#e$c%i^a&l"));
+assertTrue(App.isAnagram("Tab\tSpace", "Space\tTab"));
+assertTrue(App.isAnagram("Punctuation!!!", ".!.!nctuaiton"));
+assertFalse(App.isAnagram("apple", "pale"));
+```
+

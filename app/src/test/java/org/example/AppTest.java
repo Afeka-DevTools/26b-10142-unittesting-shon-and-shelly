@@ -174,7 +174,17 @@ class AppTest {
     void isAnagramShouldDetectAnagramsIgnoringWhitespaceAndCase() {
         assertTrue(App.isAnagram("listen", "silent"));
         assertTrue(App.isAnagram("The eyes", "They see"));
+        assertTrue(App.isAnagram("Dormitory", "Dirty room"));
+        assertTrue(App.isAnagram("Conversation", "Voices rant on"));
+        assertTrue(App.isAnagram("A gentleman", "Elegant man"));
+        assertTrue(App.isAnagram("Clint Eastwood", "Old West action"));
+        assertTrue(App.isAnagram("Eleven plus two", "Twelve plus one"));
+        assertTrue(App.isAnagram("William Shakespeare", "I am a weakish speller"));
+        assertTrue(App.isAnagram("The Morse Code", "Here come dots"));
         assertFalse(App.isAnagram("apple", "pale"));
+        assertTrue(App.isAnagram("S!p@e#c$i%a^l", "!S@p#e$c%i^a&l"));
+        assertTrue(App.isAnagram("Tab\tSpace", "Space\tTab"));
+        assertFalse(App.isAnagram("Punctuation!!!", ".!.!nctuaiton"));
     }
 
     @Test
@@ -182,7 +192,10 @@ class AppTest {
         assertEquals(2.0, App.average(new int[]{1, 2, 3}), 0.0001);
         assertEquals(2.5, App.average(new int[]{2, 3}), 0.0001);
         assertEquals(-1.0, App.average(new int[]{-2, 0}), 0.0001);
+        // mixed positive and negative numbers
+        assertEquals(4.0/3.0, App.average(new int[]{5, -3, 2}), 0.0001);
 
+        
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> App.average(new int[]{}));
         assertEquals("Empty array", exception.getMessage());
     }
