@@ -21,6 +21,7 @@
 2.	לכתוב בשורת הטרמינל את הפקודה 
 ```powershell
 https://github.com/Afeka-DevTools/26b-10142-unittesting-shon-and-shelly.git
+```
 
 
 ### 2️⃣ שלב 2: ניווט לחלונית הבדיקות המובנית (הדרך הקלה)
