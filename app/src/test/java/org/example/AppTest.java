@@ -236,5 +236,17 @@ class AppTest {
 
         String textWithPunctuation = "Hello! Hello? world, world world.";
         assertEquals("world", App.mostCommonWord(textWithPunctuation));
+
+        // Multiple spaces and tabs are treated as separators
+        String textWithWhitespace = "hello   hello\tworld  world\t world";
+        assertEquals("world", App.mostCommonWord(textWithWhitespace));
+
+        // Numbers and special characters are ignored as separators
+        String textWithNumbersAndSpecial = "123 123 apple! apple? apple@ banana# banana";
+        assertEquals("apple", App.mostCommonWord(textWithNumbersAndSpecial));
+
+        // Mixed whitespace, numbers, and punctuation
+        String complexText = "one  one\ttwo!! two 2two  two?  ";
+        assertEquals("two", App.mostCommonWord(complexText));
     }
 }

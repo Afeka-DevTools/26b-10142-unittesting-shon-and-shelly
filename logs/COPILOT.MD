@@ -420,6 +420,21 @@ Would you like me to run the tests now?
 
 ---
 
+### Latest Chat Entry: 2026-06-24 (mostCommonWord whitespace/special chars)
+
+**User:**
+- Add unit test coverage for `#sym:mostCommonWordShouldReturnCorrectWord` using multiple spaces, tabs, numbers, and special characters, and ensure they are ignored.
+
+**Assistant:**
+- Added new assertions to `mostCommonWordShouldReturnCorrectWord()` covering:
+  - multiple spaces and tabs,
+  - numbers mixed with words,
+  - punctuation and special characters,
+  - a complex mixed whitespace/number/punctuation example.
+- Updated todo: `Add whitespace/special tests to mostCommonWord` — completed.
+
+---
+
 ### Latest Chat Entry: 2026-06-24 (average min/max arrays)
 
 **User:**
@@ -480,5 +495,32 @@ assertTrue(App.isAnagram("S!p@e#c$i%a^l", "!S@p#e$c%i^a&l"));
 assertTrue(App.isAnagram("Tab\tSpace", "Space\tTab"));
 assertTrue(App.isAnagram("Punctuation!!!", ".!.!nctuaiton"));
 assertFalse(App.isAnagram("apple", "pale"));
+
+---
+
+### Latest Chat Entry: 2026-06-24 (mostCommonWord coverage)
+
+**User:**
+- #sym:mostCommonWordShouldReturnCorrectWord add to this method unit testing that include multiple spaces or tabs or numbers and special characters and make sure all of them are ignored.
+
+**Assistant:**
+- Added new tests to `mostCommonWordShouldReturnCorrectWord()` in `app/src/test/java/org/example/AppTest.java`.
+- Tested behavior with:
+  - multiple spaces and tabs,
+  - numbers mixed into the string,
+  - special characters and punctuation treated as separators,
+  - a complex mixed whitespace/numbers/punctuation example.
+- Confirmed the implementation ignores separators correctly and returns the most frequent normalized word.
+
+---
+
+### Latest Chat Entry: 2026-06-24 (mostCommonWord tests)
+
+**User:**
+- Did you add the `mostCommonWord` changes to `COPILOT.md`? If not, add our chat about that last method there.
+
+**Assistant:**
+- Confirmed the most recent `mostCommonWord` update was added to `logs/COPILOT.MD`.
+- Logged the chat confirming the change and the added unit tests for `mostCommonWordShouldReturnCorrectWord()`.
 ```
 
